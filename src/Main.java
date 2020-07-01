@@ -29,6 +29,33 @@ public class Main {
         return arr;
     }
 
+    // 冒泡排序优化  可以减少循环的次数
+    public static int[] bubbleSort1(int[] arr) {
+        int n = arr.length;
+        // 控制循环次数 需要循环 n-1 次
+        for (int i = 0; i < n - 1; i++) {
+            // 定义一个标识 只有在发生元素交换的时候才改变改标识
+            // 如果标识没有改变 说明之后的元素已经是排好序的 可以直接退出循环
+            boolean flag = true;
+            // 两两比较 将较大的沉底
+            // 这边注意要减一  防止数组越界
+            for (int j = 0; j < n - i - 1; j++) {
+                if (arr[j] > arr[j+1]) {
+                    flag = false;
+                    int temp = arr[j];
+                    arr[j] = arr[j+1];
+                    arr[j+1] = temp;
+                }
+            }
+            // 这边每次循环结束打印数组结果 可以看得更清晰
+            System.out.println(Arrays.toString(arr));
+            if (flag) {
+                break;
+            }
+        }
+        return arr;
+    }
+
     // 选择排序  时间复杂度o(n2)
     public static int[] selectSort(int[] arr) {
         int n = arr.length;
@@ -74,9 +101,9 @@ public class Main {
 
 
     public static void main(String[] args) {
-        //int[] ints = bubbleSort(array);
+        int[] ints = bubbleSort(array);
         //int[] ints = selectSort(array);
-        int[] ints = insertSort(array);
+        //int[] ints = insertSort(array);
         System.out.println(Arrays.toString(ints));
     }
 }
